@@ -291,47 +291,50 @@ end validar_equipo;
 
 
 
+
 /*PROCEDIMIENTO datos equipo*/
 create or replace procedure datos_equipo
 (
 p_id_equipo equipo.cod_equipo%type,
-p_nombre_entrenador out entrenador.p_nombre%type,
-p_nombre_asistente out asistente.p_nombre%type,
+p_nombre_entrenador out entrenador.nombre%type,
+p_nombre_asistente out asistente.nombre%type,
 p_nombre_dueno out dueno.nombre%type,
 p_nombre_jugador out jugador.nombre%type
 )
 is
-p_nombre_entrenado entrenador.p_nombre%type;
-p_nombre_duen dueno.nombre%type;
-p_nombre_asistent asistente.p_nombre%type;
-p_nombre_jugado jugador.nombre%type;
 begin
 if validar_equipo(p_id_equipo) then
   
-  select nombre into p_nombre_duen
+  select nombre into p_nombre_dueno
   from dueno
   where id_equipo=p_id_equipo;
 
-  select nombre into p_entrenado
+  select nombre into p_nombre_entrenador
   from entrenador
   where id_equipo=p_id_equipo;
 
-  select nombre into p_nombre_asistent
+  select nombre into p_nombre_asistente
   from asistente
   where id_equipo=p_id_equipo;
 
-  select nombre into p_nombre_jugado
+  select nombre into p_nombre_jugador
   from jugador
   where id_equipo=p_id_equipo;
 
 
-p_nombre_entrenador:=p_nombre_entrenado;
-p_nombre_asistente:=p_nombre_asistent;
-p_nombre_dueno:=p_nombre_duen;
-p_nombre_jugador:=p_nombre_jugado;
-
   else
-  dmb_output.put_line('EL EQUIPO NO EXISTE');
+  dbms_output.put_line('EL EQUIPO NO EXISTE');
 
   end if;
 end datos_equipo; 
+
+declare
+entr entrenador.nombre%type;
+asis asistente.nombre%type;
+due dueno.nombre%type;
+    
+jug jugador.nombre%type;
+begin
+datos_equipo(1,entr,asis,due,jug);
+dbms_output.put_line(entr);
+end;
