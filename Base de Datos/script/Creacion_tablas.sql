@@ -52,7 +52,7 @@ telefono varchar2(9) CONSTRAINT jug_tel_un UNIQUE,
 direccion varchar2(50),
 id_equipo number(3),
 nickname varchar2(50) CONSTRAINT jug_nick_un UNIQUE,
-sueldo number(6) CONSTRAINT jug_suel_ck CHECK(sueldo BETWEEN 1000 AND 200000),
+sueldo number(6) CONSTRAINT jug_suel_ck CHECK(sueldo>1000),
 id_rol number(2),
     CONSTRAINT jug_ideq_fk FOREIGN KEY (id_equipo)
 				REFERENCES equipo(cod_equipo) ON DELETE SET NULL,
