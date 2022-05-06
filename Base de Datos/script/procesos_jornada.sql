@@ -32,8 +32,9 @@ begin
      insert into jornada
      (FECHA,NUM_SEMANA,id_calendario)
         values(p_fecha,p_numSemana,p_idCalendario);
+        
   else
-    dbms_output.put_line ('El equipo no existe');
+    dbms_output.put_line ('La Jornada no existe');
   end if;
   exception
    when others then
@@ -53,7 +54,7 @@ begin
    where num_jornada = p_numJornada;
    
    else
-        dbms_output.put_line ('El dueno no existe');
+        dbms_output.put_line ('jornada no existe');
   end if;
   exception
    when others then
